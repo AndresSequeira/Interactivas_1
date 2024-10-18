@@ -1,0 +1,43 @@
+
+@use "../abstracts/vars" as vars;
+
+footer {
+    background-color: vars.$clr-main;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  footer img {
+    height: 50px;
+    margin: 0 10px;
+  }
+  
+  footer .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  footer .social-media {
+    display: flex;
+    align-items: center;
+  }
+  
+  footer .social-media img {
+    margin: 0 15px; /* Espaciado entre iconos */
+    cursor: pointer;
+  }
+  
+  footer .branding {
+    display: flex;
+    align-items: center;
+    text-align: right;
+  }
+  
+  footer .branding img {
+    margin-right: 10px;
+  }
+  
+  

@@ -1,0 +1,26 @@
+.nav-item{
+    display: flex;
+    text-decoration: none;
+    text-transform: uppercase;
+    gap: 2rem;
+}
+
+.nav-list{
+    display: flex;
+    gap: 4rem;
+    text-decoration: none;
+    align-items: center;
+    margin-left: 18rem;
+}
+
+.nav{
+    display: flex;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.nav-logo{
+    margin: 0.5rem;
+    margin-left: 22rem;
+}
+

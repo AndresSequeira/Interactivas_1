@@ -4,71 +4,109 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
     <header>
-      <nav>
-        <img src="../img/resources/Logo.png" alt="Logo" />
-        <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="#">Historia</a></li>
-          <li><a href="#">Personajes</a></li>
-          <li><a href="#">Mecánicas</a></li>
-          <li><a href="#">Login</a></li>
+      <nav class="nav">
+        <img class="nav-logo" src="../img/resources/Logo.png" alt="Logo" />
+        <ul class="nav-list text-color">
+          <li class="nav-item almarai-regular border-bottom">
+            <a href="#" class="text-decoration-none text-color">Inicio</a>
+          </li>
+          <li class="nav-item almarai-regular">
+            <a href="#" class="text-decoration-none text-color">Historia</a>
+          </li>
+          <li class="nav-item almarai-regular">
+            <a href="#" class="text-decoration-none text-color">Personajes</a>
+          </li>
+          <li class="nav-item almarai-regular">
+            <a href="#" class="text-decoration-none text-color">Mecánicas</a>
+          </li>
+          <li class="nav-item almarai-regular">
+            <a href="#" class="text-decoration-none text-color">Login</a>
+          </li>
         </ul>
       </nav>
 
-      <img src="../img/assets/background.jpg" alt="background-banner" />
+      <img
+        class="banner"
+        src="../img/assets/background.jpg"
+        alt="background-banner"
+      />
     </header>
 
-    <section class="games">
-      <div>
-        <h3>Nivel 1</h3>
-        <img src="../img/resources/enemigo_1.png" alt="Enemigo 1" />
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quae odit
-          sapiente non vero quos sed modi, eos incidunt nobis perspiciatis
-          dolore, iure cum voluptatibus aliquam quis repellat ea temporibus!
-        </p>
-        <button>Jugar</button>
-      </div>
+    <section class="levels-section">
+      <div class="container">
+        <div class="card">
+          <h3 class="almarai-regular">Nivel 1</h3>
+          <img
+            src="../img/resources/enemigo_1.png"
+            alt="Enemigo 1"
+          />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quae
+            odit sapiente non vero quos sed modi, eos incidunt nobis
+            perspiciatis dolore, iure cum voluptatibus aliquam quis repellat ea
+            temporibus!
+          </p>
+          <button class="almarai-regular">Jugar</button>
+        </div>
 
-      <div>
-        <h3>Nivel 2</h3>
-        <img src="../img/resources/enemigo_2.png" alt="Enemigo 2" />
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quae odit
-          sapiente non vero quos sed modi, eos incidunt nobis perspiciatis
-          dolore, iure cum voluptatibus aliquam quis repellat ea temporibus!
-        </p>
-        <button>Jugar</button>
-      </div>
+        <div class="card">
+          <h3 class="almarai-regular">Nivel 2</h3>
+          <img
+            src="../img/resources/enemigo_2.png"
+            alt="Enemigo 2"
+          />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quae
+            odit sapiente non vero quos sed modi, eos incidunt nobis
+            perspiciatis dolore, iure cum voluptatibus aliquam quis repellat ea
+            temporibus!
+          </p>
+          <button class="almarai-regular">Jugar</button>
+        </div>
 
-      <div>
-        <h3>Nivel 3</h3>
-        <img src="../img/resources/enemigo_3.png" alt="Enemigo 3" />
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quae odit
-          sapiente non vero quos sed modi, eos incidunt nobis perspiciatis
-          dolore, iure cum voluptatibus aliquam quis repellat ea temporibus!
-        </p>
-        <button>Jugar</button>
+        <div class="card">
+          <h3 class="almarai-regular">Nivel 3</h3>
+          <img
+            src="../img/resources/enemigo_3.png"
+            alt="Enemigo 3"
+          />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quae
+            odit sapiente non vero quos sed modi, eos incidunt nobis
+            perspiciatis dolore, iure cum voluptatibus aliquam quis repellat ea
+            temporibus!
+          </p>
+          <button class="almarai-regular">Jugar</button>
+        </div>
       </div>
     </section>
 
     <footer>
-        <div>
-            <img src="../img/resources/Logo.png" alt="Logo">
-        </div>
-
-        <div>
-            <img src="../img/resources/youtube_logo" alt="Youtube">
-            <img src="../img/resources/instagram_logo" alt="Instagram">
-            <img src="../img/resources/x_logo" alt="X">
-        </div>
-        
-
+      <div class="logo">
+        <img src="../img/resources/Logo.png" alt="El Porteño Logo" />
+      </div>
+    
+      <div class="social-media">
+        <img src="../img/resources/youtube_logo.png" alt="YouTube" />
+        <img src="../img/resources/instagram_logo.png" alt="Instagram" />
+        <img src="../img/resources/x_logo.png" alt="X" />
+      </div>
+    
+      <div class="branding">
+        <img src="../img/resources/dd_logo.png" alt="Digital Design Logo" />
+      </div>
     </footer>
   </body>
 </html>

@@ -1,0 +1,68 @@
+@use "../abstracts/vars" as vars;
+  //levels section
+  .levels-section {
+    padding: 50px 0;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 72px;
+    max-width: 1450px;
+    margin: 0 auto;
+  }
+  
+  .card {
+    background-color: vars.$clr-white;
+    border: 1px solid vars.$clr-gray;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    width: 30%;
+  }
+  
+  .card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .card img {
+    max-width: 80%; /* Tamaño de la imagen dentro de la tarjeta */
+    height: auto;
+    margin-bottom: 15px;
+  }
+  
+  .card p {
+    font-size: 0.9rem;
+    color: vars.$clr-gray;
+    margin-bottom: 20px;
+  }
+  
+  .card button {
+    background-color: vars.$clr-main; /* Color naranja para el botón */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .card button:hover {
+    background-color: vars.$clr-gray; /* Cambia el color al hacer hover */
+  }
+  
+  /* Ajustes responsivos 
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .card {
+      width: 80%;
+      margin-bottom: 20px;
+    }
+  }*/
