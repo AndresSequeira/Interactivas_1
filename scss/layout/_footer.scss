@@ -3,7 +3,7 @@
 
 footer {
     background-color: vars.$clr-main;
-    padding: 20px;
+    padding: 4rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,7 +26,8 @@ footer {
   }
   
   footer .social-media img {
-    margin: 0 15px; /* Espaciado entre iconos */
+    margin: 0 1rem; /* Espaciado entre iconos */
+    gap: 2rem;
     cursor: pointer;
   }
   

@@ -20,6 +20,7 @@
     padding: 20px;
     text-align: center;
     width: 30%;
+    min-height: 31rem;
   }
   
   .card h3 {
@@ -38,8 +39,12 @@
     color: vars.$clr-gray;
     margin-bottom: 20px;
   }
+
+  .th-p{
+    margin-bottom: 2.1rem !important;
+  }
   
-  .card button {
+  .card a {
     background-color: vars.$clr-main; /* Color naranja para el botón */
     color: white;
     border: none;
@@ -48,9 +53,10 @@
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    text-decoration: none;
   }
   
-  .card button:hover {
+  .card a:hover {
     background-color: vars.$clr-gray; /* Cambia el color al hacer hover */
   }
   
