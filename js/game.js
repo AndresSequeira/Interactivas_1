@@ -10,75 +10,144 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
-    this.load.spritesheet("player", "./img/assets/walk.png", {
-      frameWidth: 200,
-      frameHeight: 200,
-    });
-    this.load.spritesheet("enemy", "./img/assets/fish.png", {
-      frameWidth: 100,
-      frameHeight: 100,
-    });
+    this.load.spritesheet("player", "./img/assets/walk.png", { frameWidth: 200, frameHeight: 200 });
+    this.load.spritesheet("enemy", "./img/assets/fish.png", { frameWidth: 100, frameHeight: 100 });
     this.load.image("background", "./img/assets/background.jpg");
     this.load.image("ground", "./img/assets/ground.png");
+    this.load.image("island", "./img/assets/island.png");
   }
 
   create() {
-    //methods block
     // Crear la animación para el jugador
     this.anims.create({
       key: "player-walk",
       frames: this.anims.generateFrameNumbers("player", { start: 0, end: 24 }),
-      frameRate: 25, // Velocidad de la animación
-      repeat: -1, // Repetir indefinidamente
+      frameRate: 25,
+      repeat: 1,
     });
 
     // Agregar física arcade
     this.physics.world.setBoundsCollision(true, true, true, false);
 
     // Crea el fondo
-    this.background = this.add.image(-200, 0, "background");
+    this.background = this.add.image(-200, 20, "background");
     this.background.setScale(0.5);
     this.background.setOrigin(0, 0);
 
-    // Crear otra plataforma a la izquierda
-    this.leftPlatform = new Platform(this, -15, 310, "ground", 1);
-    this.leftPlatform.setSize(200, 40);
+    // Crear plataformas
+    const islandPositions = [
+      { x: 90, y: 310 },
+      { x: 270, y: 280 },
+      { x: 480, y: 310 },
+      { x: 405, y: 310 },
+      { x: 160, y: 230 },
+      { x: -30, y: 270 },
+      { x: 570, y: 270 },
+      { x: 440, y: 200 },
+    ];
 
-    // Crear una plataforma a la derecha más arriba
-    this.rightPlatform = new Platform(this, 420, 310, "ground", 1);
-    this.rightPlatform.setSize(200, 40);
-
-    // Crear el suelo en el centro y aplicar una escala
-    this.ground = new Platform(this, 200, 310, "ground", 1);
-    this.ground.setSize(200, 40);
+    // Crear las islas
+    this.islands = islandPositions.map((pos) => {
+      const island = new Platform(this, pos.x, pos.y, "island", 1);
+      island.setScale(0.2);
+      island.setSize(80, 50);
+      return island;
+    });
 
     // Crea el jugador
-    this.player = new Player(this, 0, 285);
+    this.player = new Player(this, 100, 275);
     this.player.setScale(0.5);
-    this.player.setSize(115,115);
+    this.player.setSize(40, 115);
     this.player.body.setGravityY(300);
 
     // Crea el enemigo
-    this.enemy = new Enemy(this, 400, 285);
+    let enemyHeatBoxW = 90;
+    let enemyHeatBoxH = 30;
+    this.enemy = new Enemy(this, 300, 200);
     this.enemy.setScale(0.6);
-    this.enemy.setSize(100, 100);
-    this.enemy.body.setGravityY(300);
+    this.enemy.setSize(enemyHeatBoxW, enemyHeatBoxH);
+    this.enemy.setOffset(
+      (this.enemy.width - enemyHeatBoxW) / 2,
+      (this.enemy.height - enemyHeatBoxH) / 2
+    );
+    this.enemy.body.setGravityY(0);
 
     // Hacer que las plataformas interactúen con otros objetos físicos
-    this.physics.add.collider(this.player, this.ground);
-    this.physics.add.collider(this.player, this.leftPlatform);
-    this.physics.add.collider(this.player, this.rightPlatform);
-    this.physics.add.collider(this.enemy, this.ground);
-    this.physics.add.collider(this.enemy, this.leftPlatform);
-    this.physics.add.collider(this.enemy, this.rightPlatform);
+    this.islands.forEach((island) => {
+      this.physics.add.collider(this.player, island);
+    });
 
     // Configura los controles
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+
+    // Detectar colisiones entre el jugador y el enemigo
+    this.physics.add.collider(this.player, this.enemy, this.handlePlayerEnemyCollision, null, this);
   }
 
   update() {
     this.player.anims.play("player-walk", true);
-    this.player.update(this.cursors); // Actualiza el jugador
-    this.enemy.update(); // Actualiza el enemigo
+    const playerSpeed = 150;
+    const enemySpeed = 65; // Velocidad del enemigo
+
+    // Detener el jugador si no toca ninguna tecla
+    this.player.setVelocityX(0);
+
+    // Mover al jugador
+    if (this.keyA.isDown) {
+      this.player.setVelocityX(-playerSpeed);
+      this.player.setFlipX(true);
+      console.log("🍟 Mover a la izquierda");
+    } else if (this.keyD.isDown) {
+      this.player.setVelocityX(playerSpeed);
+      this.player.setFlipX(false);
+      console.log("🤖 Mover a la derecha");
+    }
+
+    if (this.keyW.isDown && this.player.body.touching.down) {
+      this.player.setVelocityY(-170);
+      console.log("🚀 Saltar");
+    }
+
+    if (this.keyS.isDown && !this.player.body.touching.down) {
+      this.player.setVelocityY(200);
+      console.log("🚀 Caer");
+    }
+
+    // Comprobar si el jugador se sale de los límites verticales de la escena
+    if (this.player.y < 30 || this.player.y > this.scale.height) {
+        console.log("👤 Reiniciando la escena por salir de los límites");
+        this.scene.restart(); // Reinicia la escena si el jugador está fuera de los límites
+    }
+
+    // Hacer que el enemigo siga al jugador
+    this.followPlayer(this.enemy, this.player, enemySpeed);
+  }
+
+  handlePlayerEnemyCollision(player, enemy) {
+    // Verifica si el jugador está tocando la parte inferior del enemigo
+    if (player.body.touching.down && player.getBounds().bottom >= enemy.getBounds().top) {
+      player.setVelocityY(-200); // Ajusta este valor según la altura del salto deseada
+      console.log("🚀 Saltar más alto por colisión con el enemigo");
+    } else {
+      this.scene.restart(); // Reinicia la escena si no está tocando desde arriba
+    }
+  }
+
+  followPlayer(enemy, player, speed) {
+    const distance = Phaser.Math.Distance.Between(enemy.x, enemy.y, player.x, player.y);
+
+    // Verifica si el enemigo está a una cierta distancia del jugador
+    if (distance < 300) { // Cambia este valor para ajustar la distancia de seguimiento
+      this.physics.moveToObject(enemy, player, speed);
+    }
+    if(player.x < enemy.x){
+      enemy.setFlipX(false);
+    } else if (enemy.x < player.x){
+      enemy.setFlipX(true);
+    }
   }
 }
