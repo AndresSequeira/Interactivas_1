@@ -1,62 +1,95 @@
 @use "../abstracts/vars" as vars;
-  //levels section
-  .levels-section {
-    padding: 50px 0;
-  }
+
+//levels section
+.levels-section {
+  padding: 50px 0;
   
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 72px;
-    max-width: 1450px;
-    margin: 0 auto;
+  @media (max-width: 390px) {
+    padding: 20px 0;
   }
-  
-  .card {
-    background-color: vars.$clr-white;
-    border: 1px solid vars.$clr-gray;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    width: 30%;
-    min-height: 31rem;
-  }
-  
-  .card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-  
-  .card img {
-    max-width: 80%; /* Tamaño de la imagen dentro de la tarjeta */
-    height: auto;
-    margin-bottom: 15px;
-  }
-  
-  .card p {
-    font-size: 0.9rem;
-    color: vars.$clr-gray;
-    margin-bottom: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 72px;
+  max-width: 1450px;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
   }
 
-  .th-p{
-    margin-bottom: 2.1rem !important;
+  @media (max-width: 390px) {
+    gap: 20px;
   }
-  
-  .card a {
-    background-color: vars.$clr-main; /* Color naranja para el botón */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
+}
+
+.card {
+  background-color: vars.$clr-white;
+  border: 1px solid vars.$clr-gray;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  width: 30%;
+  min-height: 31rem;
+
+  @media (max-width: 1024px) {
+    width: 50%;
   }
-  
-  .card a:hover {
-    background-color: vars.$clr-gray; /* Cambia el color al hacer hover */
+
+  @media (max-width: 768px) {
+    width: 70%;
   }
-  
+
+  @media (max-width: 390px) {
+    width: 70%;
+    padding: 10px; // Reducir padding
+    min-height: 20rem; // Reducir altura mínima
+  }
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+
+  @media (max-width: 390px) {
+    font-size: 0.9rem; 
+    margin-bottom: 5px; 
+  }
+}
+
+.card img {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 15px;
+
+  @media (max-width: 390px) {
+    max-width: 60%; 
+    margin-bottom: 10px;
+  }
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: vars.$clr-gray;
+  margin-bottom: 20px;
+
+  @media (max-width: 390px) {
+    font-size: 0.75rem; 
+    margin-bottom: 10px;
+  }
+}
+
+.th-p {
+  margin-bottom: 2.1rem !important;
+
+  @media (max-width: 390px) {
+    margin-bottom: 1rem !important;
+  }
+}
+
+

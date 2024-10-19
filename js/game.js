@@ -15,6 +15,10 @@ export default class Game extends Phaser.Scene {
     this.load.image("background", "./img/assets/background.jpg");
     this.load.image("ground", "./img/assets/ground.png");
     this.load.image("island", "./img/assets/island.png");
+
+     // joystick
+     let url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js';
+     this.load.plugin('rexvirtualjoystickplugin', url, true);
   }
 
   create() {
@@ -26,6 +30,7 @@ export default class Game extends Phaser.Scene {
       repeat: 1,
     });
 
+    
     // Agregar física arcade
     this.physics.world.setBoundsCollision(true, true, true, false);
 
@@ -36,14 +41,14 @@ export default class Game extends Phaser.Scene {
 
     // Crear plataformas
     const islandPositions = [
-      { x: 90, y: 310 },
-      { x: 270, y: 280 },
-      { x: 480, y: 310 },
-      { x: 405, y: 310 },
-      { x: 160, y: 230 },
-      { x: -30, y: 270 },
-      { x: 570, y: 270 },
-      { x: 440, y: 200 },
+      { x: 90, y: 260 },
+      { x: 270, y: 230 },
+      { x: 480, y: 260 },
+      { x: 405, y: 260 },
+      { x: 160, y: 180 },
+      { x: -30, y: 220 },
+      { x: 570, y: 220 },
+      { x: 440, y: 150 },
     ];
 
     // Crear las islas
@@ -55,7 +60,7 @@ export default class Game extends Phaser.Scene {
     });
 
     // Crea el jugador
-    this.player = new Player(this, 100, 275);
+    this.player = new Player(this, 100, 225);
     this.player.setScale(0.5);
     this.player.setSize(40, 115);
     this.player.body.setGravityY(300);
@@ -63,7 +68,7 @@ export default class Game extends Phaser.Scene {
     // Crea el enemigo
     let enemyHeatBoxW = 90;
     let enemyHeatBoxH = 30;
-    this.enemy = new Enemy(this, 300, 200);
+    this.enemy = new Enemy(this, 300, 150);
     this.enemy.setScale(0.6);
     this.enemy.setSize(enemyHeatBoxW, enemyHeatBoxH);
     this.enemy.setOffset(
@@ -77,12 +82,23 @@ export default class Game extends Phaser.Scene {
       this.physics.add.collider(this.player, island);
     });
 
-    // Configura los controles
+    // Configurar los controles
     this.cursors = this.input.keyboard.createCursorKeys();
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+
+    // joystick
+    this.joyStick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
+      x: 50,
+      y: 320,
+      radius: 20,
+      base: this.add.circle(0, 0, 35, 0x888888).setAlpha(0.3), // Opacidad del base al 30%
+      thumb: this.add.circle(0, 0, 15, 0xcccccc).setAlpha(0.3), // Opacidad del thumb al 30%
+    });
+
+    this.joystickCursors = this.joyStick.createCursorKeys();
 
     // Detectar colisiones entre el jugador y el enemigo
     this.physics.add.collider(this.player, this.enemy, this.handlePlayerEnemyCollision, null, this);
@@ -97,22 +113,22 @@ export default class Game extends Phaser.Scene {
     this.player.setVelocityX(0);
 
     // Mover al jugador
-    if (this.keyA.isDown) {
+    if (this.keyA.isDown || this.joystickCursors.left.isDown) {
       this.player.setVelocityX(-playerSpeed);
       this.player.setFlipX(true);
       console.log("🍟 Mover a la izquierda");
-    } else if (this.keyD.isDown) {
+    } else if (this.keyD.isDown || this.joystickCursors.right.isDown) {
       this.player.setVelocityX(playerSpeed);
       this.player.setFlipX(false);
       console.log("🤖 Mover a la derecha");
     }
 
-    if (this.keyW.isDown && this.player.body.touching.down) {
+    if (this.keyW.isDown && this.player.body.touching.down || this.joystickCursors.up.isDown && this.player.body.touching.down) {
       this.player.setVelocityY(-170);
       console.log("🚀 Saltar");
     }
 
-    if (this.keyS.isDown && !this.player.body.touching.down) {
+    if (this.keyS.isDown && !this.player.body.touching.down || this.joystickCursors.down.isDown && !this.player.body.touching.down) {
       this.player.setVelocityY(200);
       console.log("🚀 Caer");
     }
