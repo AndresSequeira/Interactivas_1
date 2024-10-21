@@ -3,9 +3,8 @@
     text-decoration: none;
     text-transform: uppercase;
     gap: 2rem;
-  
-    @media (max-width: 768px) {
-      display: none; // Ocultar en dispositivos móviles
+    @media (max-width: 1080){
+        display: none !important;
     }
   }
   
@@ -15,9 +14,8 @@
     text-decoration: none;
     align-items: center;
     margin-left: 18rem;
-  
-    @media (max-width: 768px) {
-      display: none; // Ocultar en dispositivos móviles
+    @media (max-width: 1080px){
+        display: none !important;
     }
   }
   
@@ -25,13 +23,16 @@
     display: flex;
     margin-top: 2rem;
     margin-bottom: 2rem;
+    @media (max-width: 1080px){
+        display: none !important;
+    }
   }
   
   .nav-logo {
     margin: 0.5rem;
     margin-left: 22rem;
-  
-    @media (max-width: 768px) {
-      display: none; // Ocultar en dispositivos móviles
+
+    @media (max-width: 1080px){
+        display: none !important;
     }
   }

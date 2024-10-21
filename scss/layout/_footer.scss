@@ -8,10 +8,10 @@ footer {
   align-items: center;
   flex-wrap: wrap;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
+  @media (max-width: 1080px) {
+    flex-direction: column; // Cambiar a columna
+    align-items: center; // Centrar contenido
+    padding: 2rem; // Ajustar padding
   }
 }
 
@@ -19,9 +19,8 @@ footer img {
   height: 50px;
   margin: 0 10px;
 
-  @media (max-width: 390px) {
-    height: 40px; // Reducir el tamaño de las imágenes en pantallas pequeñas
-    margin: 0 5px;
+  @media (orientation: 1080) {
+    height: 60px; // Ajustar tamaño en horizontal si es necesario
   }
 }
 
@@ -29,28 +28,24 @@ footer .logo {
   display: flex;
   align-items: center;
 
-  @media (max-width: 768px) {
-    margin-bottom: 1rem; // Añadir espacio debajo del logo en pantallas pequeñas
+  @media (max-width: 1080) {
+    margin-bottom: 1rem; // Espacio debajo del logo
   }
 }
 
 footer .social-media {
   display: flex;
   align-items: center;
-  justify-content: center; // Alinear al centro en pantallas pequeñas
-
-  @media (max-width: 768px) {
-    margin-bottom: 1rem; // Añadir espacio debajo de las redes sociales
-  }
+  justify-content: center;
 }
 
 footer .social-media img {
-  margin: 0 1rem; /* Espaciado entre iconos */
+  margin: 0 1rem; // Espaciado entre iconos
   gap: 2rem;
   cursor: pointer;
 
-  @media (max-width: 390px) {
-    margin: 0 0.5rem; // Reducir espaciado entre iconos
+  @media (orientation: 1080) {
+    margin: 0 1.5rem; // Espaciado adecuado en horizontal
   }
 }
 
@@ -59,23 +54,17 @@ footer .branding {
   align-items: center;
   text-align: right;
 
-  @media (max-width: 768px) {
-    text-align: center; // Centrar el texto en pantallas pequeñas
-    margin-top: 1rem;
+  @media (max-width: 1080) {
+    text-align: center; // Centrar texto
+    margin-top: 1rem; // Espacio encima
   }
 
-  @media (max-width: 390px) {
-    flex-direction: column; // Cambiar a columna en pantallas muy pequeñas
-    text-align: center;
-    margin-top: 1.5rem;
-  }
 }
 
 footer .branding img {
   margin-right: 10px;
 
-  @media (max-width: 390px) {
-    margin-right: 0;
-    margin-top: -2rem
+  @media (orientation: 1080) {
+    margin-right: 15px; // Ajustar margen en horizontal
   }
 }

@@ -92,10 +92,10 @@ export default class Game extends Phaser.Scene {
     // joystick
     this.joyStick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
       x: 50,
-      y: 320,
+      y: 280,
       radius: 20,
-      base: this.add.circle(0, 0, 35, 0x888888).setAlpha(0.3), // Opacidad del base al 30%
-      thumb: this.add.circle(0, 0, 15, 0xcccccc).setAlpha(0.3), // Opacidad del thumb al 30%
+      base: this.add.circle(0, 0, 50, 0x888888).setAlpha(0.3), // Opacidad del base al 30%
+      thumb: this.add.circle(0, 0, 25, 0xcccccc).setAlpha(0.3), // Opacidad del thumb al 30%
     });
 
     this.joystickCursors = this.joyStick.createCursorKeys();
