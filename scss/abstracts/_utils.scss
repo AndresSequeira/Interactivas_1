@@ -1,5 +1,17 @@
+span{
+    color: black;
+}
+
 .text-decoration-none{
     text-decoration: none;
+}
+
+.align-center{
+    align-items: center;
+}
+
+.justify-content{
+    justify-content: center;
 }
 
 .sc-1{scale: .1;}
@@ -11,3 +23,12 @@
 .sc-7{scale: .7;}
 .sc-8{scale: .8;}
 .sc-9{scale: .9;}
+
+.sc-1-5{scale: 1.5;}
+.sc-2-0{scale: 2;}
+.sc-3-0{scale: 3;}
+.sc-4-0{scale: 4;}
+.sc-5-0{scale: 5;}
+.sc-6-0{scale: 6;}
+.sc-7-0{scale: 7;}
+.sc-8-0{scale: 8;}
