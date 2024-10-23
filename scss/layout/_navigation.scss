@@ -1,38 +1,68 @@
 .nav-item {
-    display: flex;
-    text-decoration: none;
-    text-transform: uppercase;
-    gap: 2rem;
-    @media (max-width: 1080){
-        display: none !important;
-    }
+  display: flex;
+  text-decoration: none;
+  text-transform: uppercase;
+  gap: 2rem;
+  @media (max-width: 1080) {
+    display: none !important;
   }
-  
-  .nav-list {
-    display: flex;
-    gap: 4rem;
-    text-decoration: none;
-    align-items: center;
-    margin-left: 18rem;
-    @media (max-width: 1080px){
-        display: none !important;
-    }
-  }
-  
-  .nav {
-    display: flex;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    @media (max-width: 1080px){
-        display: none !important;
-    }
-  }
-  
-  .nav-logo {
-    margin: 0.5rem;
-    margin-left: 22rem;
+}
 
-    @media (max-width: 1080px){
-        display: none !important;
-    }
+.nav-list {
+  display: flex;
+  gap: 4rem;
+  text-decoration: none;
+  align-items: center;
+  margin-left: 18rem;
+  @media (max-width: 1080px) {
+    display: none !important;
   }
+}
+
+.nav {
+  display: flex;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  @media (max-width: 1080px) {
+    display: none !important;
+  }
+}
+
+.nav-logo {
+  margin: 0.5rem;
+  margin-left: 22rem;
+
+  @media (max-width: 1080px) {
+    display: none !important;
+  }
+}
+
+.nav-mobile {
+  display: flex;
+  flex-direction: column; /* Alineamos los elementos en columna */
+  padding: 1rem;
+  @media (min-width: 1081px) {
+    display: none; /* Oculto en pantallas grandes */
+  }
+}
+
+.nav-logo-mobile {
+  margin: 0 auto; /* Centramos el logo */
+  padding-bottom: 1rem;
+}
+
+.nav-list-mobile {
+  display: flex;
+  flex-direction: column; /* Alineamos verticalmente */
+  gap: 1rem; /* Espacio entre elementos */
+  text-decoration: none;
+  align-items: center; /* Centra los items en la columna */
+}
+
+.nav-item-mobile {
+  text-transform: uppercase;
+  padding: 1rem;
+  width: 100%;
+  text-align: center; /* Centra el texto */
+  border-bottom: 1px solid #ccc; /* Agregamos una separación */
+}
