@@ -1,5 +1,6 @@
-// Main.js
 import Game from './Game.js';
+import Level2 from './Level2.js';
+import Level3 from './Level3.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -12,9 +13,7 @@ const config = {
             debug: false,
         }
     },
-    scene: Game, // Usa Game aquí
+    scene: [Game, Level2, Level3] // Agrega Level3 aquí
 };
 
-// Crear el juego y pasar el objeto de configuración
 let game = new Phaser.Game(config);
-
