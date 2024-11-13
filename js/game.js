@@ -6,6 +6,7 @@ import Background from "./Background.js";
 export default class Level1 extends Phaser.Scene {
     constructor() {
         super({ key: "Level1" });
+        this.initialTime = 30; // Tiempo inicial en segundos
     }
 
     preload() {
@@ -19,13 +20,14 @@ export default class Level1 extends Phaser.Scene {
     }
 
     create() {
+        this.timeRemaining = this.initialTime; // Reiniciar el tiempo al valor inicial
         this.background = new Background(this, -200, 20, "background");
 
         const islandPositions = [
-            { x: 90, y: 260 },//
-            { x: 270, y: 230 },//
-            { x: 480, y: 260 },//
-            { x: 405, y: 260 },//
+            { x: 90, y: 260 },
+            { x: 270, y: 230 },
+            { x: 480, y: 260 },
+            { x: 405, y: 260 },
             { x: 170, y: 190 },
             { x: -30, y: 220 },
             { x: 570, y: 220 },
@@ -65,6 +67,22 @@ export default class Level1 extends Phaser.Scene {
             frameRate: 25,
             repeat: -1
         });
+
+        // Crear el texto del temporizador y mostrar el tiempo inicial
+        this.timerText = this.add.text(10, 20, `Tiempo: ${this.timeRemaining}`, { fontSize: '20px', fill: '#ffffff' });
+
+        // Temporizador para el cambio de nivel después de 30 segundos
+        this.time.delayedCall(this.initialTime * 1000, () => {
+            this.scene.start("Level2");
+        });
+
+        // Temporizador para actualizar el tiempo restante cada segundo
+        this.timeEvent = this.time.addEvent({
+            delay: 1000,
+            callback: this.updateTimer,
+            callbackScope: this,
+            loop: true
+        });
     }
 
     update() {
@@ -72,18 +90,27 @@ export default class Level1 extends Phaser.Scene {
         this.player.handleInput(this.cursors, this.keyA, this.keyD, this.keyW, this.keyS, this.joystickCursors);
 
         if (this.player.y < 50 || this.player.y > this.scale.height - 50) {
-            this.scene.restart();
+            //this.scene.restart();
+            this.scene.start("Level2");
         }
 
         this.enemy.followPlayer(this.player, 65);
+    }
+
+    updateTimer() {
+        this.timeRemaining -= 1; // Reducir el tiempo restante en 1 segundo
+        this.timerText.setText(`Tiempo: ${this.timeRemaining}`); // Actualizar el texto del temporizador
+
+        if (this.timeRemaining <= 0) {
+            this.timeEvent.remove(); // Detener el temporizador
+        }
     }
 
     handlePlayerEnemyCollision(player, enemy) {
         if (player.body.touching.down && player.getBounds().bottom >= enemy.getBounds().top) {
             player.setVelocityY(-200);
         } else {
-          this.scene.restart();
-          //this.scene.start("Level2"); codigo para pasar de nivel 
+            this.scene.restart();
         }
     }
 }

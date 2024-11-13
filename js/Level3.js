@@ -6,6 +6,7 @@ import Background from "./Background.js";
 export default class Level3 extends Phaser.Scene {
     constructor() {
         super({ key: "Level3" });
+        this.initialTime = 30; // Tiempo inicial en segundos
     }
 
     preload() {
@@ -19,40 +20,49 @@ export default class Level3 extends Phaser.Scene {
     }
 
     create() {
-        // Fondo del primer nivel
+        // Reiniciar tiempo restante al tiempo inicial
+        this.timeRemaining = this.initialTime;
+
+        // Fondo
         this.background = new Background(this, -200, 20, "background");
 
-        // Nuevas posiciones de plataformas para el tercer nivel
+        // Posiciones de plataformas específicas para Level3
         const islandPositions = [
-            { x: 70, y: 300 },
-            { x: 200, y: 250 },
-            { x: 370, y: 220 },
-            { x: 520, y: 180 },
-            { x: 650, y: 140 },
-            { x: 100, y: 100 },
-            { x: 250, y: 180 },
-            { x: 500, y: 300 },
+            { x: 0, y: 300 },
+            { x: 100, y: 260 },
+            { x: 300, y: 280 },
+            { x: 380, y: 280 },
+            { x: 540, y: 260 },
+            { x: 100, y: 150 },
+            { x: 280, y: 150 },
+            { x: 360, y: 150 },
         ];
 
-        // Crear las plataformas en las nuevas posiciones
+        // Crear las plataformas en las posiciones específicas de Level3
         this.islands = islandPositions.map((pos) => {
             const island = new Platform(this, pos.x, pos.y, "island", 0.2);
             return island;
         });
 
         // Crear jugador
-        this.player = new Player(this, 100, 270);
+        this.player = new Player(this, 50, 250);
 
-        // Crear tres enemigos con una velocidad menor
-        this.enemy1 = new Enemy(this, 150, 150);
+        // Crear tres enemigos en diferentes posiciones
+        this.enemy1 = new Enemy(this, 300, 300);
+        this.enemy2 = new Enemy(this, 500, 300);
+        this.enemy3 = new Enemy(this, 700, 300);
 
         // Configurar colisiones
         this.islands.forEach(island => {
             this.physics.add.collider(this.player, island);
             this.physics.add.collider(this.enemy1, island);
+            this.physics.add.collider(this.enemy2, island);
+            this.physics.add.collider(this.enemy3, island);
         });
 
         this.physics.add.collider(this.player, this.enemy1, this.handlePlayerEnemyCollision, null, this);
+        this.physics.add.collider(this.player, this.enemy2, this.handlePlayerEnemyCollision, null, this);
+        this.physics.add.collider(this.player, this.enemy3, this.handlePlayerEnemyCollision, null, this);
 
         // Configuración de controles
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -74,6 +84,22 @@ export default class Level3 extends Phaser.Scene {
             frameRate: 25,
             repeat: -1
         });
+
+        // Texto del temporizador visual
+        this.timerText = this.add.text(10, 10, `Tiempo: ${this.timeRemaining}`, { fontSize: '20px', fill: '#ffffff' });
+
+        // Temporizador para cambiar de nivel o finalizar después de 30 segundos
+        this.time.delayedCall(this.initialTime * 1000, () => {
+            console.log("Tiempo agotado, nivel completado o finalizado.");
+        });
+
+        // Temporizador para actualizar el tiempo restante cada segundo
+        this.timeEvent = this.time.addEvent({
+            delay: 1000,
+            callback: this.updateTimer,
+            callbackScope: this,
+            loop: true
+        });
     }
 
     update() {
@@ -84,10 +110,20 @@ export default class Level3 extends Phaser.Scene {
             this.scene.restart();
         }
 
-        // Hacer que los enemigos sigan al jugador con una velocidad menor
+        // Hacer que los enemigos sigan al jugador con una velocidad más lenta
         const slowEnemySpeed = 40;
         this.enemy1.followPlayer(this.player, slowEnemySpeed);
+        this.enemy2.followPlayer(this.player, slowEnemySpeed);
+        this.enemy3.followPlayer(this.player, slowEnemySpeed);
+    }
 
+    updateTimer() {
+        this.timeRemaining -= 1; // Reducir el tiempo restante en 1 segundo
+        this.timerText.setText(`Tiempo: ${this.timeRemaining}`); // Actualizar el texto del temporizador
+
+        if (this.timeRemaining <= 0) {
+            this.timeEvent.remove(); // Detener el temporizador
+        }
     }
 
     handlePlayerEnemyCollision(player, enemy) {

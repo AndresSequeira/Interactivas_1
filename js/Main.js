@@ -10,7 +10,7 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: false,
+            debug: true,
         }
     },
     scene: [Game, Level2, Level3] // Agrega Level3 aquí
