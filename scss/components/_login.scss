@@ -1,0 +1,68 @@
+@use "../abstracts/vars" as vars;
+
+// Estilos para el contenedor del formulario de login
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; // Ajusta el tamaño de la sección
+    background-color: vars.$clr-gray;
+    padding: 2rem;
+  }
+  
+  .login-form {
+    background-color: vars.$clr-white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  
+    label {
+      font-size: 1rem;
+      color: vars.$clr-dark;
+    }
+  
+    input[type="text"],
+    input[type="password"] {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid vars.$clr-gray;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.3s ease;
+  
+      &:focus {
+        border-color: vars.$clr-main;
+      }
+    }
+  
+    button {
+      padding: 0.75rem;
+      font-size: 1rem;
+      color: vars.$clr-white;
+      background-color: vars.$clr-main;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: darken(vars.$clr-main, 10%);
+      }
+    }
+  }
+  
+  // Ajustes responsivos para pantallas pequeñas
+  @media (max-width: 768px) {
+    .login-section {
+      padding: 1rem;
+    }
+  
+    .login-form {
+      padding: 1.5rem;
+    }
+  }
