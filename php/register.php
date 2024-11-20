@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($database->id()) {
         echo 'Usuario registrado exitosamente.';
-        header('Location: login.html');
+        header('Location: ../html/login.html');
     } else {
         echo 'Hubo un error al registrar el usuario.';
     }

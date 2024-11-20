@@ -53,5 +53,7 @@ $sessions = $database->select('user_sessions', [
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <a href="../html/home.html">Volver a la pagina principal</a>
 </body>
 </html>

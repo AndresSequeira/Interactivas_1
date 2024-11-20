@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
 
     echo 'Inicio de sesión exitoso.';
-    header('Location: login.html');
+    header('Location: ../html/home.html');
     exit;
 }
 ?>

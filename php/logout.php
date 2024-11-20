@@ -17,6 +17,6 @@ if (isset($_SESSION['user_id'])) {
     session_destroy();
 }
 
-header('Location: login.html'); // Redirige al login
+header('Location: ../html/login.html'); // Redirige al login
 exit;
 ?>

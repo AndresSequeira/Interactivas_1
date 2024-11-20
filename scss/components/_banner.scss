@@ -116,8 +116,10 @@
   }
 }
 
-a{
-  margin-top: 1rem;
-  text-align: center;
-  display: block;
+.register-link {
+  a {
+    margin-top: 1rem;
+    display: block;
+    padding-left: 1rem !important;
+  }
 }
