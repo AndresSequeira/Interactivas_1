@@ -88,16 +88,23 @@
     <section class="banner-container">
       <img class="banner" src="../img/assets/background.jpg" alt="background-banner" />
       <div class="login-overlay">
-          <form action="login_process.php" method="POST" class="login-form">
-              <h2>Iniciar Sesión</h2>
-              <label class=".almarai-bold" for="username">Usuario:</label>
-              <input type="text" id="username" name="username" required />
-              
-              <label class=".almarai-bold" for="password">Contraseña:</label>
-              <input type="password" id="password" name="password" required />
-              
-              <button type="submit">Ingresar</button>
-          </form>
+        <form action="../php/login.php" method="POST" class="login-form">
+          <h2>Iniciar Sesión</h2>
+          
+          <label for="name">Usuario:</label>
+          <input type="text" id="name" name="name" required>
+          
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" name="password" required>
+          
+          <button type="submit">Ingresar</button>
+      </form>
+  
+          <!-- Botón o enlace para registrarse -->
+          <div class="register-link">
+              <a href="register.php">¿No tienes cuenta? Regístrate aquí</a>
+              <a href="logout.php">Cerrar la Sesión</a>
+          </div>
       </div>
   </section>
   
